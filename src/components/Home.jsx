@@ -1,24 +1,26 @@
 import React from "react";
+import Products from "./Products";
 
 const Home = () => {
   return (
     <div className="hero">
-      <div class="card text-bg-light border-0">
+      <div className="card text-bg-light border-0">
         <img
           src="assets/bg2.jpg"
-          class="card-img"
+          className="card-img"
           alt="Backgound"
           height="650px"
         />
-        <div class="card-img-overlay">
+        <div className="card-img-overlay">
           <div className="container">
-            <h5 class="card-title display-3 mb-0 fw-bolder mt-4">
+            <h5 className="card-title display-3 mb-0 fw-bolder mt-4">
               NEW SEASON ARRIVALS
             </h5>
-            <p class="card-text fs-2 lead">CHECK OUT ALL THE TRENDS</p>
+            <p className="card-text fs-2 lead">CHECK OUT ALL THE TRENDS</p>
           </div>
         </div>
       </div>
+      <Products />
     </div>
   );
 };
