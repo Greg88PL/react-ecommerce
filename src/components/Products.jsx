@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
 
 const Products = () => {
   const [data, setData] = useState([]);
@@ -18,7 +19,22 @@ const Products = () => {
   }, []);
 
   const Loading = () => {
-    return <>Loading...</>;
+    return (
+      <>
+        <div className="col-md-3">
+          <Skeleton height={350} />
+        </div>
+        <div className="col-md-3">
+          <Skeleton height={350} />
+        </div>
+        <div className="col-md-3">
+          <Skeleton height={350} />
+        </div>
+        <div className="col-md-3">
+          <Skeleton height={350} />
+        </div>
+      </>
+    );
   };
 
   const ShowProducts = () => {
@@ -48,7 +64,9 @@ const Products = () => {
                     <h5 class="card-title mb-0">
                       {product.title.substring(0, 12)}...
                     </h5>
-                    <p class="card-text lead fw-bold">${product.price}</p>
+                    <p class="card-text lead fw-bold">
+                      ${product.price.toFixed(2)}
+                    </p>
                     <a href="#" class="btn btn-outline-dark">
                       Buy Now
                     </a>
