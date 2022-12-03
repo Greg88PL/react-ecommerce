@@ -37,17 +37,55 @@ const Products = () => {
     );
   };
 
+  const filterProduct = (cat) => {
+    const updatedList = data.filter((prod) => prod.category === cat);
+    setFilter(updatedList);
+  };
+
   const ShowProducts = () => {
     return (
       <>
         <div className="buttons d-flex justify-content-center mb-5 pb-5">
-          <button className="btn btn-outline-dark me-2">All</button>
-          <button className="btn btn-outline-dark me-2">Men's Clothing</button>
-          <button className="btn btn-outline-dark me-2">
+          <button
+            onClick={() => {
+              setFilter(data);
+            }}
+            className="btn btn-outline-dark me-2"
+          >
+            All
+          </button>
+          <button
+            onClick={() => {
+              filterProduct("men's clothing");
+            }}
+            className="btn btn-outline-dark me-2"
+          >
+            Men's Clothing
+          </button>
+          <button
+            onClick={() => {
+              filterProduct("women's clothing");
+            }}
+            className="btn btn-outline-dark me-2"
+          >
             Women's Clothing
           </button>
-          <button className="btn btn-outline-dark me-2">Jewelry</button>
-          <button className="btn btn-outline-dark me-2">Electronics</button>
+          <button
+            onClick={() => {
+              filterProduct("jewelery");
+            }}
+            className="btn btn-outline-dark me-2"
+          >
+            Jewelery
+          </button>
+          <button
+            onClick={() => {
+              filterProduct("electronics");
+            }}
+            className="btn btn-outline-dark me-2"
+          >
+            Electronics
+          </button>
         </div>
         {filter.map((product) => {
           return (
