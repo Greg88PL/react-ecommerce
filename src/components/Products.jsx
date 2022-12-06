@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
+import { Link } from "react-router-dom";
 
 const Products = () => {
   const [data, setData] = useState([]);
@@ -105,9 +106,12 @@ const Products = () => {
                     <p class="card-text lead fw-bold">
                       ${product.price.toFixed(2)}
                     </p>
-                    <a href="#" class="btn btn-outline-dark">
+                    <Link
+                      to={`/products/${product.id}`}
+                      className="btn btn-outline-dark"
+                    >
                       Buy Now
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
