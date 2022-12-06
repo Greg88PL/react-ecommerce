@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
+      <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm fixed-top">
         <div className="container">
           <NavLink className="navbar-brand fw-bold fs-4" to="/">
             GregStore

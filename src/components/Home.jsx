@@ -3,7 +3,7 @@ import Products from "./Products";
 
 const Home = () => {
   return (
-    <div className="hero">
+    <div className="hero mt-5">
       <div className="card text-bg-light border-0">
         <img
           src="assets/bg2.jpg"
