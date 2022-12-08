@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Link, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addItem } from "../redux/action/index";
 
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  const addProduct = (product) => {
+    dispatch(addItem(product));
+  };
 
   useEffect(() => {
     const getProduct = async () => {
@@ -56,7 +63,12 @@ const Product = () => {
           </p>
           <h3 className="display-6 fw-bold my-4">$ {product.price}</h3>
           <p className="lead">{product.description}</p>
-          <button className="btn btn-outline-dark px-4 py-2">
+          <button
+            className="btn btn-outline-dark px-4 py-2"
+            onClick={() => {
+              addProduct(product);
+            }}
+          >
             Add to Cart
           </button>
           <Link className="btn btn-dark ms-2 px-3 py-2" to="/cart">
