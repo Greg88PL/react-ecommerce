@@ -9,6 +9,7 @@ import Product from "./components/Product";
 import Products from "./components/Products";
 import Contact from "./components/Contact";
 import Checkout from "./components/Checkout";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
       <Footer />
