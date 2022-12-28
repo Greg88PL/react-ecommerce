@@ -10,6 +10,7 @@ import Products from "./components/Products";
 import Contact from "./components/Contact";
 import Checkout from "./components/Checkout";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import Regulations from "./components/Regulations";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/regulations" element={<Regulations />} />
         <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
       <Footer />
