@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addItem } from "../redux/action/index";
