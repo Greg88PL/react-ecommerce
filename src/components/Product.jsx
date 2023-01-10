@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addItem } from "../redux/action/index";
+import { addToCart } from "../redux/cartSlice";
 
 const Product = () => {
   const { id } = useParams();
@@ -12,7 +12,7 @@ const Product = () => {
 
   const dispatch = useDispatch();
   const addProduct = (product) => {
-    dispatch(addItem(product));
+    dispatch(addToCart(product));
   };
 
   useEffect(() => {

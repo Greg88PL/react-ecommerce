@@ -1,18 +1,27 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addItem, deleteItem, clearCart } from "../redux/action";
+import {
+  incrementQuantity,
+  decrementQuantity,
+  removeFromCart,
+  clearCart,
+} from "../redux/cartSlice";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const state = useSelector((state) => state.handleCart);
+  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   const handleDelete = (item) => {
-    dispatch(deleteItem(item));
+    dispatch(removeFromCart(item));
   };
 
-  const handleAdd = (item) => {
-    dispatch(addItem(item));
+  const handlePlusQty = (item) => {
+    dispatch(incrementQuantity(item));
+  };
+
+  const handleMinusQty = (item) => {
+    dispatch(decrementQuantity(item));
   };
 
   const handleClear = () => {
@@ -40,20 +49,26 @@ const Cart = () => {
             <div className="col-md-4">
               <h3>{cartItem.title}</h3>
               <p className="lead fw-bold">
-                {cartItem.qty} x ${cartItem.price.toFixed(2)} = $
-                {cartItem.qty * cartItem.price.toFixed(2)}
+                {cartItem.quantity} x ${cartItem.price.toFixed(2)} = $
+                {(cartItem.quantity * cartItem.price).toFixed(2)}
               </p>
               <button
                 className="btn btn-outline-dark me-4"
-                onClick={() => handleDelete(cartItem)}
+                onClick={() => dispatch(decrementQuantity(cartItem))}
               >
                 <i className="fa fa-minus"></i>
               </button>
               <button
-                className="btn btn-outline-dark"
-                onClick={() => handleAdd(cartItem)}
+                className="btn btn-outline-dark me-4"
+                onClick={() => dispatch(incrementQuantity(cartItem))}
               >
                 <i className="fa fa-plus"></i>
+              </button>
+              <button
+                className="btn btn-dark"
+                onClick={() => handleDelete(cartItem)}
+              >
+                Delete From Cart
               </button>
             </div>
           </div>
@@ -64,7 +79,7 @@ const Cart = () => {
 
   const emptyCart = () => {
     return (
-      <div className="px-4 my-5 bg-light rounded-3 py-5">
+      <div className="my-5 bg-light rounded-3 py-5 text-center">
         <div className="container py-4">
           <div className="row">
             <h3>Your Cart is Empty</h3>
@@ -108,16 +123,18 @@ const Cart = () => {
   };
 
   return (
-    <>
+    <div className="container my-5 py-5">
       <Link
         to="/products"
         className="btn-close float-end mt-5 me-3"
         aria-label="Close"
       ></Link>
-      {state.length === 0 && emptyCart()}
-      {state.length !== 0 && state.map(cartItems)}
-      {state.length !== 0 && checkoutButton()}
-    </>
+      <h1 className="text-center">Shopping Cart</h1>
+
+      {cart.length === 0 && emptyCart()}
+      {cart.length !== 0 && cart.map(cartItems)}
+      {cart.length !== 0 && checkoutButton()}
+    </div>
   );
 };
 

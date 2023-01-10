@@ -11,7 +11,6 @@ import Contact from "./components/Contact";
 import Checkout from "./components/Checkout";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Regulations from "./components/Regulations";
-import { SkeletonTheme } from "react-loading-skeleton";
 
 function App() {
   return (

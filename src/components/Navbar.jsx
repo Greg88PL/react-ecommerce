@@ -3,7 +3,15 @@ import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const state = useSelector((state) => state.handleCart);
+  const cart = useSelector((state) => state.cart);
+
+  const getTotalQuantity = () => {
+    let total = 0;
+    cart.forEach((item) => {
+      total += item.quantity;
+    });
+    return total;
+  };
   return (
     <div className="pb-5">
       <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm fixed-top">
@@ -54,7 +62,7 @@ const Navbar = () => {
               </Link>
               <Link to="/cart" className="btn btn-outline-dark ms-2">
                 <i className="fa fa-shopping-cart me-1"></i> Cart (
-                {state.length})
+                {getTotalQuantity() || 0})
               </Link>
             </div>
           </div>
