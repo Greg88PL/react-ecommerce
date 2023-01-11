@@ -11,10 +11,13 @@ import Contact from "./components/Contact";
 import Checkout from "./components/Checkout";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Regulations from "./components/Regulations";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <>
+      <ToastContainer />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
