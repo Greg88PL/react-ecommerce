@@ -2,18 +2,30 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const Checkout = () => {
-  const state = useSelector((state) => state.handleCart);
+  const cart = useSelector((state) => state.cart);
+
+  const deliveryCost = 12;
+
+  const getTotalQuantity = () => {
+    let totalQuantity = 0;
+    cart.forEach((item) => {
+      totalQuantity += item.quantity;
+    });
+    return totalQuantity;
+  };
 
   let total = 0;
 
   const itemList = (item) => {
-    total = total + item.price;
+    total = total + item.quantity * item.price;
     return (
       <li className="list-group-item d-flex justify-content-between lh-condensed">
         <div>
           <h6 className="my-0">{item.title}</h6>
         </div>
-        <span className="text-muted">${item.price}</span>
+        <span className="text-muted">
+          ${(item.quantity * item.price).toFixed(2)}
+        </span>
       </li>
     );
   };
@@ -26,31 +38,30 @@ const Checkout = () => {
             <h4 className="d-flex justify-content-between align-items-center mb-3">
               <span className="text-primary">Your cart</span>
               <span className="badge bg-primary rounded-pill">
-                {state.length}
+                {getTotalQuantity()}
               </span>
             </h4>
             <ul className="list-group mb-3">
-              {state.map(itemList)}
+              {cart.map(itemList)}
 
-              {/* <li className="list-group-item d-flex justify-content-between lh-condensed">
-                <div>
-                  <h6 className="my-0">Product name</h6>
-                  <small className="text-muted">Brief description</small>
+              <li className="list-group-item d-flex justify-content-between lh-condensed">
+                <div className="text-primary">
+                  <h6 className="my-0 text-uppercase">Delivery cost</h6>
                 </div>
-                <span className="text-muted">$12</span>
-              </li> */}
+                <span className="text-primary">${deliveryCost.toFixed(2)}</span>
+              </li>
 
               {/* <li className="list-group-item d-flex justify-content-between bg-light">
                 <div className="text-success">
                   <h6 className="my-0">Promo code</h6>
                   <small>EXAMPLECODE</small>
                 </div>
-                <span className="text-success">-$5</span>
+                <span className="text-success">-$5.00</span>
               </li> */}
 
               <li className="list-group-item d-flex justify-content-between">
                 <span>Total (USD)</span>
-                <strong>${total}</strong>
+                <strong>${(total + deliveryCost).toFixed(2)}</strong>
               </li>
             </ul>
 
