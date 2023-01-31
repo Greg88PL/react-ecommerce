@@ -73,6 +73,13 @@ const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cart));
       toast.error("Cart cleared", { position: "bottom-left" });
     },
+    createOrder: (state, action) => {
+      state.cart = [];
+      localStorage.setItem("cartItems", JSON.stringify(state.cart));
+      toast.success("Your order has been sent. Thank you for shopping.", {
+        position: "bottom-left",
+      });
+    },
   },
 });
 
@@ -83,4 +90,5 @@ export const {
   incrementQuantity,
   decrementQuantity,
   clearCart,
+  createOrder,
 } = cartSlice.actions;

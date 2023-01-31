@@ -1,8 +1,22 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { createOrder } from "../redux/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const firstNameInputRef = useRef();
+  const lastNameInputRef = useRef();
+  const companyInputRef = useRef();
+  const emailInputRef = useRef();
+  const phoneInputRef = useRef();
+  const streetInputRef = useRef();
+  const postalCodeInputRef = useRef();
+  const cityInputRef = useRef();
+  const countryInputRef = useRef();
 
   const deliveryCost = 12;
 
@@ -28,6 +42,67 @@ const Checkout = () => {
         </span>
       </li>
     );
+  };
+
+  // const submitOrderHandler = async (userData) => {
+  //   // setIsSubmitting(true);
+  //   await fetch(
+  //     "https://gregstore-98bc3-default-rtdb.europe-west1.firebasedatabase.app/orders.json",
+  //     {
+  //       method: "POST",
+  //       body: JSON.stringify({
+  //         // user: userData,
+  //         // orderedItems: cartCtx.items,
+  //         orderedItems: cart,
+  //       }),
+  //     }
+  //   );
+  //   // setIsSubmitting(false);
+  //   // setDidSubmit(true);
+
+  //   dispatch(createOrder());
+  //   navigate("/");
+  // };
+
+  const submitOrderHandler = () => {
+    const enteredFirstName = firstNameInputRef.current.value;
+    const enteredLastName = lastNameInputRef.current.value;
+    const enteredCompany = companyInputRef.current.value;
+    const enteredEmail = emailInputRef.current.value;
+    const enteredPhone = phoneInputRef.current.value;
+    const enteredStreet = streetInputRef.current.value;
+    const enteredPostalCode = postalCodeInputRef.current.value;
+    const enteredCity = cityInputRef.current.value;
+    const enteredCountry = countryInputRef.current.value;
+
+    const userData = {
+      firstName: enteredFirstName,
+      lastName: enteredLastName,
+      company: enteredCompany,
+      email: enteredEmail,
+      phone: enteredPhone,
+      street: enteredStreet,
+      city: enteredCity,
+      postalCode: enteredPostalCode,
+      country: enteredCountry,
+    };
+
+    // setIsSubmitting(true);
+    fetch(
+      "https://gregstore-98bc3-default-rtdb.europe-west1.firebasedatabase.app/orders.json",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          user: userData,
+          orderedItems: cart,
+        }),
+      }
+    );
+    // setIsSubmitting(false);
+    // setDidSubmit(true);
+
+    dispatch(createOrder());
+    navigate("/");
   };
 
   return (
@@ -82,7 +157,11 @@ const Checkout = () => {
           </div>
           <div className="col-md-8 order-md-1">
             <h4 className="mb-3">Billing address</h4>
-            <form className="needs-validation" novalidate>
+            <form
+              className="needs-validation"
+              novalidate
+              onSubmit={submitOrderHandler}
+            >
               <div className="row">
                 <div className="col-md-6 mb-3">
                   <label htmlFor="firstName">First Name</label>
@@ -92,6 +171,7 @@ const Checkout = () => {
                     id="firstName"
                     placeholder="Jan"
                     required
+                    ref={firstNameInputRef}
                   />
                   <div className="invalid-feedback">
                     Valid first name is required.
@@ -106,6 +186,7 @@ const Checkout = () => {
                     id="lastName"
                     placeholder="Kowalski"
                     required
+                    ref={lastNameInputRef}
                   />
                   <div className="invalid-feedback">
                     Valid last name is required.
@@ -122,6 +203,7 @@ const Checkout = () => {
                   className="form-control"
                   id="company"
                   placeholder="Your Company Name"
+                  ref={companyInputRef}
                 />
                 <div className="invalid-feedback">
                   Please enter your company name.
@@ -136,6 +218,7 @@ const Checkout = () => {
                   id="email"
                   required
                   placeholder="name@example.com"
+                  ref={emailInputRef}
                 />
                 <div className="invalid-feedback">
                   Please enter a valid email address for shipping updates.
@@ -150,20 +233,23 @@ const Checkout = () => {
                   id="address"
                   placeholder="ul. Kwiatowa 1/23"
                   required
+                  ref={streetInputRef}
                 />
                 <div className="invalid-feedback">
                   Please enter your shipping address.
                 </div>
               </div>
+
               <div className="row">
                 <div className="col-md-6 mb-3">
-                  <label fhtmlFor="postal">Postal Code</label>
+                  <label htmlFor="postal">Postal Code</label>
                   <input
                     type="text"
                     className="form-control"
                     id="postal"
                     placeholder="02-232"
                     required
+                    ref={postalCodeInputRef}
                   />
                   <div className="invalid-feedback">
                     Please enter your Postal Code.
@@ -178,6 +264,7 @@ const Checkout = () => {
                     id="city"
                     placeholder="Warszawa"
                     required
+                    ref={cityInputRef}
                   />
                   <div className="invalid-feedback">
                     Please enter your City.
@@ -194,6 +281,7 @@ const Checkout = () => {
                     id="country"
                     placeholder="Polska"
                     required
+                    ref={countryInputRef}
                   />
                   <div className="invalid-feedback">
                     Please enter your Country.
@@ -208,6 +296,7 @@ const Checkout = () => {
                     id="phone"
                     placeholder="570 709 071"
                     required
+                    ref={phoneInputRef}
                   />
                   <div className="invalid-feedback">
                     Please enter your Phone Number.
